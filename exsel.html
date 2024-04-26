@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title></title>
+    
+  </head>
+  <body>
+    <table id="myTable" border="1">
+      <tr>
+        <td>أحمد</td>
+        <td>محمد</td>
+      </tr>
+      <tr>
+        <td>علي</td>
+        <td>أميرة</td>
+      </tr>
+    </table>
+
+<button onclick="downloadExcelFromTable('myTable')">تحويل إلى Excel</button>
+    
+    <script type="text/javascript" charset="utf-8">
+      function downloadExcelFromTable(tableId) {
+  const table = document.getElementById(tableId);
+  
+  // إنشاء جدول Excel فارغ
+  let excelData = '<table>';
+
+  // الحصول على صفوف الجدول
+  const rows = table.getElementsByTagName('tr');
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i];
+    excelData += '<tr>';
+    
+    // الحصول على خلايا كل صف
+    const cells = row.getElementsByTagName('td');
+    for (let j = 0; j < cells.length; j++) {
+      const cell = cells[j];
+      
+      // قراءة نص الخلية وإضافته إلى الجدول Excel
+      excelData += '<td>' + cell.textContent + '</td>';
+    }
+    
+    excelData += '</tr>';
+  }
+
+  excelData += '</table>';
+
+  // تحويل النص إلى بيانات Blob
+  const blob = new Blob([excelData], { type: 'application/vnd.ms-excel' });
+
+  // إنشاء رابط للتنزيل
+  const url = URL.createObjectURL(blob);
+
+  // إنشاء عنصر رابط للتنزيل
+  const link = document.createElement('a');
+  link.href = url;
+  
+  // تعيين اسم الملف
+  link.download = 'table.xlsx';
+
+  // إضافة الرابط إلى الصفحة
+  document.body.appendChild(link);
+
+  // تنفيذ النقر التلقائي على الرابط
+  link.click();
+
+  // إزالة الرابط من الصفحة
+  document.body.removeChild(link);
+
+  // إلغاء رابط URL
+  URL.revokeObjectURL(url);
+}
+    </script>
+  </body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>
+      إدارة المصاريف الشخصية
+    </title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="./assets/css/dataTables.bootstrap4.min.css" type="text/css" />
+    <link rel="stylesheet" href="./assets/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="./assets/css/responsive.css" type="text/css" />
+    <style type="text/css" media="all">
+
+    </style>
+  </head>
+  <body>
+    <div class="home">
+      <div class="navebar">
+        <nav>
+          <span class="navbar-toggle-icon">
+            <i class="fa fa-bars"></i>
+          </span>
+          <ul>
+            <li class="close-menu">×</li>
+            <a href="./index.html">
+              <li>
+                الصفحة الرئيسية
+              </li>
+            </a>
+            <a href="home.html">
+              <li>
+                دخول البرنامج
+              </li>
+            </a>
+          </ul>
+        </nav>
+      </div>
+      <div class="container page-home">
+        <br /><br />
+        <div class="text-center color">
+          <h1>
+            التقرير
+          </h1>
+        </div>
+        <br />
+        <!-- Main content -->
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body table-responsive">
+                <table id="example1" class="text-center table-striped" style="width:100%">
+                  <thead>
+                  <tr>
+                  
+                    <th>التحكم</th>
+                    <th>السبب</th>
+                    <th>المبلغ</th>
+                    <th>التصنيف</th>
+                    <th>التاريخ</th>
+                    <th>التسلسل</th>
+                    
+                  </tr>
+                  </thead>
+                  <tbody>        
+                    
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+    <!-- /.content -->
+      <div class="container-alert">
+        <div class="container">
+          <div class="my-alert succ">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            ...     تم اضافة البيانات بنجاح 
+         </div>
+        </div>
+      </div>
+      <a class="to-top" href="#top">
+        <i class="fa fa-solid fa-arrow-up"></i>
+      </a>
+      <div class="footer">
+       <footer>
+         <span>
+           تصميم وبرمجة : 
+           <a href="#">
+              عادل محمود 
+           </a>
+         </span>
+       </footer>
+      </div>
+    </div>
+    <script src="./assets/js/jquery.min.js"></script>
+    <script src="./assets/js/bootstrap.bundle.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+    <script src="./assets/js/jquery.dataTables.min.js"></script>
+    <script src="./assets/js/dataTables.bootstrap4.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/data.js"></script>
+    <script>
+      $(function () {
+        $("#example1").DataTable({
+          "responsive": true, "lengthChange": false, "autoWidth": false,
+          "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        });
+      });
+    </script>
+    <script type="text/javascript" charset="utf-8">
+      
+    </script>
+  </body>
+</html>
