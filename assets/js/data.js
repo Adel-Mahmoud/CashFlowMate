@@ -7,7 +7,7 @@ function get_data(data){
 }
  let dataArray  = [];
  let dataArray2 = [];
-//$(document).ready(()=>{
+$(document).ready(()=>{
   var ix = $("#index");
   var cn = $("#categoey_name");
   var rn = $("#reason");
@@ -49,53 +49,58 @@ function get_data(data){
     }
   });
   // view data 
+  });
+  // console.log(JSON.parse(get_data("database")))
   function show(){
     let imp       = 0;
     let exp       = 0;
     let remaining = 0;
     let total     = 0;
     let tr        = ""; 
-    JSON.parse(get_data("database")).map((item,index)=>{
-      tr += `<tr>
-                <td>
-                <i onclick="delete_(${index})" class="fa fa-trash text-danger button"></i>
-                &emsp;| &emsp;
-                <i onclick="select_data(${index})" class="fa fa-edit text-success button"></i> 
-                </td>
-                <td>${item.reason}</td>
-                <td>${item.amount}</td>
-                <td>${item.categoey_name}</td>
-                <td>${item.cat_date}</td>
-                <td>${index+1}</td>
-             </tr>`;
-             if(item.categoey_name === "إيرادات"){
-               imp += Number(item.amount);
-             }else{
-               exp += Number(item.amount);
-             }
-    });
-    $("#table-id tbody").html(tr);
-    $("#expo").text(exp);
-    $("#impo").text(imp);
-    imp = Number(imp);
-    exp = Number(exp);
-    remaining = imp - exp;
-    $("#rem").text(remaining);
-    var percent = (remaining * 100) / imp;
-    $("#rate").text(Math.floor(percent));
+    if (get_data("database") !== 'undefined' && get_data("database") !== null && get_data("database") !== "") {
+      JSON.parse(get_data("database")).map((item,index)=>{
+        if (item !== null && item !== undefined) {
+        tr += `<tr>
+                  <td>
+                  <i onclick="delete_(${index})" class="fa fa-trash text-danger button"></i>
+                  &emsp;| &emsp;
+                  <i onclick="select_data(${index})" class="fa fa-edit text-success button"></i> 
+                  </td>
+                  <td>${item.reason}</td>
+                  <td>${item.amount}</td>
+                  <td>${item.categoey_name}</td>
+                  <td>${item.cat_date}</td>
+                  <td>${index+1}</td>
+               </tr>`;
+               if(item.categoey_name === "إيرادات"){
+                 imp += Number(item.amount);
+               }else{
+                 exp += Number(item.amount);
+               }
+        }
+      });
+      $("#table-id tbody").html(tr);
+      $("#expo").text(exp);
+      $("#impo").text(imp);
+      imp = Number(imp);
+      exp = Number(exp);
+      remaining = imp - exp;
+      $("#rem").text(remaining);
+      var percent = (remaining * 100) / imp;
+      $("#rate").text(Math.floor(percent));
+      
+      if(percent < 70 && percent > 30){
+        $(".progress-bar").css('background', 'orange');
+      }else if(percent < 30){
+         $(".progress-bar").css('background','red');
+      }else{
+        $(".progress-bar").css('background','green');
+      }
+      $(".progress-bar").width(Math.floor(percent)+"%");
     
-    if(percent < 70 && percent > 30){
-      $(".progress-bar").css('background', 'orange');
-    }else if(percent < 30){
-       $(".progress-bar").css('background','red');
-    }else{
-      $(".progress-bar").css('background','green');
     }
-    
-    $(".progress-bar").width(Math.floor(percent)+"%");
   }
   show();
-//});
   // Edit Data 
   function select_data(id){
     var data = JSON.parse(get_data("database"));
@@ -104,7 +109,7 @@ function get_data(data){
       if(index == id){
         rn.val(item.reason)
         at.val(item.amount)
-        cd.val(item.cat_date)
+        // cd.val(item.cat_date)
         $('#categoey_name option').each(function() {
           if($(this).val() == item.categoey_name){
             if ($(this).attr("selected")) {
